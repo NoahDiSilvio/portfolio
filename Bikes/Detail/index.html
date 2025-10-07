@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>Bike X</title>
+    <link rel="icon" href="../../StudyRideLogo.png">
+  <script type="module" crossorigin src="../../assets/bikedetail-CeBjLfxx.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/style-BjS08jOG.js">
+  <link rel="modulepreload" crossorigin href="../../assets/main-Bi1Bom5L.js">
+  <link rel="modulepreload" crossorigin href="../../assets/star-D8qmRvLv.js">
+  <link rel="stylesheet" crossorigin href="../../assets/style-D5PSd2HB.css">
+</head>
+
+<body>
+    <div class="DetailContainer">
+        <header>
+            <a href="#main" class="skip">Skip naar de main content</a>
+            <nav>
+                <ul>
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../../Building/">Campus</a></li>
+                    <li><a class="current" href="../">Bikes</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main id="main">
+            <h1 class='title'>Titel</h1>
+            <section class="infoBike">
+            </section>
+            <div id="map"></div>
+            <section class="reviewSection">
+                <h3>Recente reviews</h3>
+                <section class="reviews">
+                </section>
+            </section>
+            <section class="form">
+                <form action="#" novalidate class="formBike">
+                    <h2>Review Form</h2>
+                    <div>
+                        <label for="email">
+                            <span class="field-label">Email *</span>
+                            <span class="Email-error"></span>
+                        </label>
+                        <input type="email" name="email" id="email" autocomplete="email" required tabindex="0">
+                    </div>
+                    <div>
+                        <label for="firstname">
+                            <span class="field-label">Voornaam *</span>
+                            <span class="FirstName-error">
+                            </span>
+                        </label>
+                        <input type="text" name="firstname" id="firstname" autocomplete="given-name" required>
+                    </div>
+                    <div>
+                        <label for="name">
+                            <span class="field-label">Naam *</span>
+                            <span class="Name-error"></span>
+                        </label>
+                        <input type="text" name="name" id="name" autocomplete="family-name" required>
+                    </div>
+                    <div class="Tevredenheid">
+                        <label>Tevredenheid *
+                            <div class="star-rating">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                        </label>
+                        <input type="hidden" name="rating" id="rating" required>
+                    </div>
+                    <div>
+                        <label for="message">
+                            <span class="field-label">Bericht *</span>
+                            <span class="Message-error"></span>
+                        </label>
+                        <textarea type="text" name="message" rows="4" id="message" required></textarea>
+                    </div>
+                    <div>
+                        <button type="submit">Verstuur</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <footer></footer>
+    </div>
+</body>
+
+</html>
