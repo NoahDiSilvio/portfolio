@@ -13,11 +13,11 @@ import ProjectsSection from '@/components/ProjectSection.vue'
 const isNotFound = !['/', '/index.html'].includes(window.location.pathname)
 
 const navLinks = [
-  { href: '#timeline', label: 'Traject' },
-  { href: '#projects', label: 'Projecten'},
-  { href: '#skills', label: 'Skills' },
-  { href: '#services', label: 'Wat ik doe' },
   { href: '#about', label: 'Over mij' },
+  { href: '#projects', label: 'Projecten'},
+  { href: '#services', label: 'Wat ik doe' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#timeline', label: 'Traject' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -119,11 +119,11 @@ window.removeEventListener('keydown', onKeydown)
 
   <main>
     <HeroSection />
-    <TimelineSection />
-    <ProjectsSection/>
-    <SkillsSection />
-    <ServicesSection />
     <AboutSection />
+    <ProjectsSection/>
+    <ServicesSection />
+    <SkillsSection />
+    <TimelineSection />
     <ContactSection />
   </main>
 
@@ -210,13 +210,15 @@ window.removeEventListener('keydown', onKeydown)
   padding: 0 2rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: center;
   gap: 2rem 6rem;
+  text-align: center;
 }
 
 .cols div {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.4rem;
 }
 

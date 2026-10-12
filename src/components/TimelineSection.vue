@@ -48,19 +48,6 @@ import { timeline } from '../data/timeline'
 
 .row:first-child { padding-top: 0; }
 
-.row::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 0;
-  height: 1px;
-  background: var(--red);
-  transition: width 0.4s;
-}
-
-.row:hover::after { width: 100%; }
-
 .meta {
   display: flex;
   flex-direction: column;
@@ -92,7 +79,7 @@ h3 {
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1;
   margin: 0.5rem 0;
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.3s;
 }
 
 .row:hover h3 { color: var(--red); }
@@ -110,5 +97,12 @@ h3 {
 @media (max-width: 56.25rem) {
   .row { grid-template-columns: 1fr; gap: 1rem; }
   .meta { flex-direction: row; align-items: center; gap: 1rem; }
+}
+
+@media (hover: hover) {
+  .row:hover h3 {
+    color: var(--red);
+    transform: translateX(0.5rem);
+  }
 }
 </style>

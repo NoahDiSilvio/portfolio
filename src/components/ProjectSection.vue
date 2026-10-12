@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import ProjectCard from './ProjectCard.vue'
 import { projects } from '../data/projects'
+
+function span(i: number, total: number): number {
+  const rest = total % 3
+  if (rest === 1 && total >= 4 && i >= total - 4) return 3
+  if (rest === 2 && i >= total - 2) return 3
+  return 2
+}
 </script>
 
 <template>
@@ -14,7 +21,7 @@ import { projects } from '../data/projects'
         :project="p"
         :index="i"
         class="reveal"
-        :style="{ '--delay': i * 0.1 + 's' }"
+        :style="{ '--delay': i * 0.1 + 's', '--span': span(i, projects.length) }"
       />
     </div>
   </section>
@@ -23,36 +30,19 @@ import { projects } from '../data/projects'
 <style scoped>
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 2.5rem 2rem;
 }
 
-.more {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  text-align: center;
+.grid > * {
+  grid-column: span var(--span, 2);
 }
 
-.star {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  background: var(--red);
-  display: grid;
-  place-items: center;
-  font-size: 1.5rem;
-  transition: transform 0.3s;
-}
-
-.more:hover .star { transform: rotate(90deg); }
 
 @media (max-width: 62.5rem) {
-  .grid { grid-template-columns: 1fr 1fr; }
+  .grid > * { grid-column: span 3; }
 }
 @media (max-width: 37.5rem) {
-  .grid { grid-template-columns: 1fr; }
+  .grid > * { grid-column: span 6; }
 }
 </style>

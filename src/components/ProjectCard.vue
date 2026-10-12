@@ -6,35 +6,51 @@ defineProps<{ project: Project; index: number }>()
 
 <template>
   <article class="card">
-    <header>
+    <header class="top">
       <span class="num">{{ String(index + 1).padStart(2, '0') }}</span>
-      <div class="small-caps">
-        <div>{{ project.title }}</div>
-        <div class="muted">{{ project.type }}</div>
-      </div>
+      <span class="type small-caps"><span class="dot"></span>{{ project.type }}</span>
     </header>
 
     <div class="thumb">
-      <img v-if="project.image" :src="project.image" :alt="project.title" />
+      <img v-if="project.image" :src="project.image" :alt="`Screenshot van ${project.title}`" />
       <span v-else class="placeholder">{{ project.title }}</span>
     </div>
 
-    <p class="desc">{{ project.description }}</p>
-    <p class="tech small-caps">{{ project.tech.join(' · ') }}</p>
+    <h3 class="title">{{ project.title }}</h3>
 
-    <div class="links small-caps">
-      <a v-if="project.github" :href="project.github" target="_blank">GitHub ↗</a>
-      <a v-if="project.demo" :href="project.demo" target="_blank">Demo ↗</a>
+    <p class="desc">{{ project.description }}</p>
+
+    <ul class="tech">
+      <li v-for="t in project.tech" :key="t">{{ t }}</li>
+    </ul>
+
+    <div class="links">
+      <a v-if="project.demo" :href="project.demo" target="_blank" class="demo">
+        Live demo <span>↗</span>
+      </a>
+      <a v-if="project.github" :href="project.github" target="_blank" class="code small-caps">
+        Bekijk code ↗
+      </a>
     </div>
   </article>
 </template>
 
 <style scoped>
-header {
+.card {
+  display: grid;
+  grid-row: span 6;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+.top {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
-  align-items: flex-start;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .num {
@@ -44,55 +60,108 @@ header {
   border-bottom: 1px solid var(--text);
 }
 
-.muted { color: var(--muted); }
+.type {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  text-align: right;
+}
 
 .thumb {
   aspect-ratio: 16 / 10;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
   display: grid;
   place-items: center;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
 
 .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(0.6);
-  transition: filter 0.3s, transform 0.3s;
-}
-
-.card:hover .thumb img {
-  filter: grayscale(0);
-  transform: scale(1.03);
+  object-position: top;
+  transition: transform 0.4s, filter 0.4s;
 }
 
 .placeholder {
-  font-family: Georgia, serif;
-  font-size: 2rem;
-  font-style: italic;
-  color: var(--muted);
+  padding: 1rem;
+  font-family: var(--display);
+  font-size: 2.5rem;
+  color: var(--border);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: 1.5rem;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  line-height: 0.95;
+  transition: color 0.2s, transform 0.3s;
 }
 
 .desc {
+  margin: 0.75rem 0 1.25rem;
   font-size: 0.9rem;
-  margin: 1rem 0 0.5rem;
+  color: #cfcfcf;
 }
 
-.tech { color: var(--red); }
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.4rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
 
-.links { display: flex; gap: 1rem; }
-.links a:hover { color: var(--red); }
+.tech li {
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 62.438rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: start;
+  gap: 1.25rem;
+}
+
+.demo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 62.438rem;
+  background: var(--red);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.demo span { transition: transform 0.2s; }
+
+.code {
+  border-bottom: 1px solid var(--muted);
+  padding-bottom: 0.15rem;
+  color: var(--muted);
+  transition: color 0.2s, border-color 0.2s;
+}
 
 @media (hover: hover) {
-  .thumb img {
-    filter: grayscale(0.6);
-    transition: filter 0.3s, transform 0.3s;
-  }
+  .thumb img { filter: grayscale(0.6); }
 
-  .card:hover .thumb img {
-    filter: none;
-  }
+  .card:hover .thumb img { filter: none; transform: scale(1.04); }
+  .card:hover .title { color: var(--red); transform: translateX(0.5rem); }
+
+  .demo:hover span { transform: translate(0.125rem, -0.125rem); }
+  .code:hover { color: var(--text); border-color: var(--text); }
 }
 </style>

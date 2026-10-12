@@ -29,7 +29,7 @@ export const projects: Project[] = [
   {
     title: 'Kompas Bakkerij',
     type: 'Teamproject · Agile Team Project',
-    description: 'een webplatform waarop klanten online brood en gebak kunnen bestellen bij een bakkerij en ophalen op een gekozen dag. (onder constructie)',
+    description: 'Een webplatform waarop klanten online brood en gebak kunnen bestellen bij een bakkerij en ophalen op een gekozen dag. (onder constructie)',
     tech: ['Vue', 'Laravel'],
     image: '/projects/kompas.png',
   },
