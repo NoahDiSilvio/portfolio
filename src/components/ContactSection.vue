@@ -163,4 +163,16 @@ const stars = Array.from({ length: starCount }, () => ({
 @media (prefers-reduced-motion: reduce) {
   .twinkle { animation: none; }
 }
+
+@media (max-width: 62.5rem) {
+  .twinkle:nth-child(n + 26) {
+    display: none;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .twinkle:nth-child(n + 13) {
+    display: none;
+  }
+}
 </style>
