@@ -14,6 +14,7 @@ export const projects: Project[] = [
     type: 'Mobile app',
     description: 'App die een boodschappenlijst maakt op basis van je weekmenu en voorraad. (onder constructie)',
     tech: ['Flutter'],
+    image: '/projects/restje.png',
   },
   {
     title: "Sven's Frozen Delight",
@@ -25,5 +26,11 @@ export const projects: Project[] = [
     github: 'https://github.com/NoahDiSilvio/svens-frozen-delight',
     demo: 'https://noahdisilvio.github.io/svens-frozen-delight/',
   },
-
+  {
+    title: 'Kompas Bakkerij',
+    type: 'Teamproject · Agile Team Project',
+    description: 'een webplatform waarop klanten online brood en gebak kunnen bestellen bij een bakkerij en ophalen op een gekozen dag. (onder constructie)',
+    tech: ['Vue', 'Laravel'],
+    image: '/projects/kompas.png',
+  },
 ]
