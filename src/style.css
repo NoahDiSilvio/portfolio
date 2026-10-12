@@ -181,7 +181,6 @@ h1, h2, h3 {
 .roll span {
   display: inline-block;
   position: relative;
-  transition: transform 0.45s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .roll span::after {
@@ -194,6 +193,34 @@ h1, h2, h3 {
 
 .roll:hover span {
   transform: translateY(-100%);
+}
+
+@media (hover: hover) {
+  .roll span {
+    transition: transform 0.45s cubic-bezier(0.7, 0, 0.3, 1);
+  }
+
+  .roll span::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    color: var(--red);
+  }
+
+  .roll:hover span {
+    transform: translateY(-100%);
+  }
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+@media (max-width: 48rem) {
+  body {
+    padding-top: 4.75rem;
+  }
 }
 
 

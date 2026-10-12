@@ -106,6 +106,7 @@ window.removeEventListener('keydown', onKeydown)
       <button class="menu-toggle" :class="{ open: menuOpen }" :aria-expanded="menuOpen" aria-controls="menu" aria-label="Menu" @click="menuOpen = !menuOpen">
         <span></span>
         <span></span>
+        <span></span>
       </button>
 
       <div id="menu" class="links" :class="{ open: menuOpen }">
@@ -249,14 +250,20 @@ window.removeEventListener('keydown', onKeydown)
 }
 
 @media (max-width: 48rem) {
-  .nav { padding: 1rem 1.25rem; }
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.25rem;
+  }
 
   .menu-toggle {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    gap: 6px;
+    gap: 0.375rem;
     width: 2.75rem;
     height: 2.75rem;
     padding: 0;
@@ -267,13 +274,16 @@ window.removeEventListener('keydown', onKeydown)
 
   .menu-toggle span {
     width: 1.6rem;
-    height: 2px;
+    height: 0.125rem;
     background: var(--text);
-    transition: transform 0.3s;
+    transition: transform 0.3s, opacity 0.2s;
   }
 
-  .menu-toggle.open span:first-child { transform: translateY(4px) rotate(45deg); }
-  .menu-toggle.open span:last-child { transform: translateY(-4px) rotate(-45deg); }
+  .menu-toggle span:nth-child(2) {background: var(--red);}
+
+  .menu-toggle.open span:nth-child(1) { transform: translateY(0.5rem) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-0.5rem) rotate(-45deg); }
 
   .links {
     position: absolute;
@@ -316,4 +326,7 @@ window.removeEventListener('keydown', onKeydown)
 
   .bottom { padding: 1.25rem; }
 }
+
+.links .roll span::after { display: none; }
+.links .roll:hover span { transform: none; color: var(--red); }
 </style>
