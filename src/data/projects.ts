@@ -21,7 +21,7 @@ export const projects: Project[] = [
     description:
       'Webshop voor een ijsmaker met bestelformulier, admin-dashboard en live tracking van de ijskarren via WebSockets.',
     tech: ['TypeScript', 'PHP', 'MySQL', 'WebSockets'],
-    image: '/projects/svens-frozen-delight.png',
+    image: '/projects/sven-frozen-delight.png',
     github: 'https://github.com/NoahDiSilvio/svens-frozen-delight',
     demo: 'https://noahdisilvio.github.io/svens-frozen-delight/',
   },
