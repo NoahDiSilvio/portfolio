@@ -54,7 +54,7 @@ const facts = [
 <style scoped>
 .about {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3rem;
   align-items: center;
 }
@@ -119,7 +119,7 @@ const facts = [
 }
 
 @media (max-width: 56.25rem) {
-  .about { grid-template-columns: 1fr; }
+  .about { grid-template-columns: minmax(0, 1fr); }
   .photo-wrap { max-width: 20rem; margin-left: 0.75rem; }
 }
 </style>

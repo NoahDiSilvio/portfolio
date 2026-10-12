@@ -61,7 +61,7 @@ const services = [
 
 .service summary {
   display: grid;
-  grid-template-columns: 3.125rem 1fr 1.2fr 2.5rem;
+  grid-template-columns: 3.125rem minmax(0, 1fr) minmax(0, 1.2fr) 2.5rem;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 0;
@@ -111,7 +111,7 @@ const services = [
 }
 
 @media (max-width: 43.75rem) {
-  .service summary { grid-template-columns: 2.5rem 1fr 1.875rem; }
+  .service summary { grid-template-columns: 2.5rem minmax(0, 1fr) 1.875rem; }
   .tagline { display: none; }
   .body { padding-left: 0; }
 }

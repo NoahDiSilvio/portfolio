@@ -177,7 +177,7 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
 }
 
@@ -217,7 +217,7 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
 }
 
 @media (max-width: 48rem) {
-  .cols { grid-template-columns: 1fr; }
+  .cols { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 48rem) {

@@ -65,6 +65,7 @@
   border-bottom: 0.125rem solid var(--bg);
   padding-bottom: 0.2rem;
   transition: padding 0.2s;
+  overflow-wrap: anywhere;
 }
 
 .email:hover { padding-left: 0.5rem; }
