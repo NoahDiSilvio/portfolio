@@ -53,6 +53,11 @@ const focus = ['Backend', 'Frontend', 'Databases', 'Mobile']
 .content {
   position: relative;
   z-index: 2;
+  pointer-events: none;
+}
+
+.content a {
+  pointer-events: auto;
 }
 
 .eyebrow {
@@ -152,5 +157,16 @@ h1 {
 
 @keyframes fadeIn {
   to { opacity: 1; }
+}
+
+@media (hover: hover) {
+  .photo {
+    filter: grayscale(1) contrast(1.1);
+    transition: filter 0.6s ease;
+  }
+
+  .visual:hover .photo {
+    filter: none;
+  }
 }
 </style>

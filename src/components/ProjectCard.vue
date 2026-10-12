@@ -84,4 +84,15 @@ header {
 
 .links { display: flex; gap: 1rem; }
 .links a:hover { color: var(--red); }
+
+@media (hover: hover) {
+  .thumb img {
+    filter: grayscale(0.6);
+    transition: filter 0.3s, transform 0.3s;
+  }
+
+  .card:hover .thumb img {
+    filter: none;
+  }
+}
 </style>

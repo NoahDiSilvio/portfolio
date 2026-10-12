@@ -122,4 +122,15 @@ const facts = [
   .about { grid-template-columns: minmax(0, 1fr); }
   .photo-wrap { max-width: 20rem; margin-left: 0.75rem; }
 }
+
+@media (hover: hover) {
+  .photo-wrap img {
+    filter: grayscale(1) contrast(1.1);
+    transition: filter 0.5s ease;
+  }
+
+  .photo-wrap:hover img {
+    filter: none;
+  }
+}
 </style>

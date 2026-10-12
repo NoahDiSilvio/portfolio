@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 
 import HeroSection from '@/components/HeroSection.vue'
 import TimelineSection from '@/components/TimelineSection.vue'
@@ -78,20 +78,43 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
   document.documentElement.classList.add('loaded')
   setTimeout(() => document.getElementById('loader')?.remove(), 900)
 })
+
+const menuOpen = ref(false)
+
+function closeMenu() {
+  menuOpen.value = false
+}
+
+watch(menuOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') closeMenu()
+}
+
+window.addEventListener('keydown', onKeydown)
+window.removeEventListener('keydown', onKeydown)
 </script>
 
 <template>
   <NotFound v-if="isNotFound" />
   <template v-else>
-  <nav class="nav">
-    <a href="#home" class="logo">N<span class="dot"></span>DS</a>
-    <div class="links">
-      <a v-for="link in navLinks" :key="link.href" :href="link.href" class="roll">
-        <span :data-text="link.label">{{ link.label }}</span>
-      </a>
-      <span class="dot"></span>
-    </div>
-  </nav>
+    <nav class="nav">
+      <a href="#home" class="logo" @click="closeMenu">N<span class="dot"></span>DS</a>
+
+      <button class="menu-toggle" :class="{ open: menuOpen }" :aria-expanded="menuOpen" aria-controls="menu" aria-label="Menu" @click="menuOpen = !menuOpen">
+        <span></span>
+        <span></span>
+      </button>
+
+      <div id="menu" class="links" :class="{ open: menuOpen }">
+        <a v-for="link in navLinks" :key="link.href" :href="link.href" class="roll" :class="{ active: activeId === link.href.slice(1) }" @click="closeMenu">
+          <span :data-text="link.label">{{ link.label }}</span>
+        </a>
+        <span class="dot"></span>
+      </div>
+    </nav>
 
   <main>
     <HeroSection />
@@ -103,35 +126,37 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
     <ContactSection />
   </main>
 
-  <footer class="footer">
-    <div class="cols">
-      <div>
-        <p class="small-caps muted">Pagina's</p>
-        <a v-for="link in navLinks" :key="link.href" :href="link.href" class="roll">
-          <span :data-text="link.label">{{ link.label }}</span>
-        </a>
+    <footer class="footer">
+      <div class="cols">
+        <div>
+          <p class="small-caps muted">Socials</p>
+          <a href="https://github.com/NoahDiSilvio" target="_blank" class="roll">
+            <span data-text="GitHub">GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/noah-di-silvio-6743633aa/" target="_blank" class="roll">
+            <span data-text="LinkedIn">LinkedIn</span>
+          </a>
+        </div>
+        <div>
+          <p class="small-caps muted">Contact</p>
+          <a href="mailto:noah.di.silvio7@gmail.com" class="roll">
+            <span data-text="E-mail">E-mail</span>
+          </a>
+          <span>Gent, België</span>
+        </div>
       </div>
-      <div>
-        <p class="small-caps muted">Socials</p>
-        <a href="https://github.com/NoahDiSilvio" target="_blank" class="roll"><span data-text="GitHub">GitHub</span></a>
-        <a href="https://www.linkedin.com/in/noah-di-silvio-6743633aa/" target="_blank" class="roll"><span data-text="LinkedIn">LinkedIn</span></a>
-      </div>
-      <div>
-        <p class="small-caps muted">Locatie</p>
-        <span>Gent, België</span>
-      </div>
-    </div>
 
-    <div class="marquee">
-      <div class="track">
-        <span v-for="n in 4" :key="n">Waar backend en frontend samenkomen <span class="red">●</span>&nbsp;</span>
+      <div class="marquee">
+        <div class="track">
+          <span v-for="n in 4" :key="n">Waar backend en frontend samenkomen <span class="red">✦</span>&nbsp;</span>
+        </div>
       </div>
-    </div>
-    <div class="bottom small-caps muted">
-      <span>© 2026 Noah Di Silvio</span>
-      <a href="#home">Terug naar boven ↑</a>
-    </div>
-  </footer>
+
+      <div class="bottom small-caps muted">
+        <span>© 2026 Noah Di Silvio</span>
+        <span>Portfolio</span>
+      </div>
+    </footer>
   </template>
 </template>
 
@@ -145,7 +170,7 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
   align-items: center;
   padding: 1.25rem 2rem;
   background: rgba(13, 13, 13, 0.85);
-  backdrop-filter: blur(0.5rem);
+  backdrop-filter: blur(8px);
 }
 
 .logo {
@@ -166,11 +191,15 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
   text-transform: uppercase;
 }
 
+.links .active span { color: var(--red); }
+
 .links a:hover { color: var(--red); }
+
+.menu-toggle { display: none; }
 
 .footer {
   border-top: 1px solid var(--border);
-  padding-top: 4rem;
+  padding-top: 3rem;
   overflow: hidden;
 }
 
@@ -179,8 +208,8 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 2rem 6rem;
 }
 
 .cols div {
@@ -214,16 +243,77 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
 .bottom {
   display: flex;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
+  gap: 1rem;
+  padding: 1.25rem 2rem;
   border-top: 1px solid var(--border);
 }
 
 @media (max-width: 48rem) {
-  .cols { grid-template-columns: minmax(0, 1fr); }
-}
+  .nav { padding: 1rem 1.25rem; }
 
-@media (max-width: 48rem) {
-  .links a { display: none; }
-  .footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 6px;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 1.6rem;
+    height: 2px;
+    background: var(--text);
+    transition: transform 0.3s;
+  }
+
+  .menu-toggle.open span:first-child { transform: translateY(4px) rotate(45deg); }
+  .menu-toggle.open span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+  .links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: calc(100dvh - 100%);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 1rem 1.25rem;
+    background: var(--bg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+  }
+
+  .links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .links a {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--display);
+    font-size: 2.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .links .dot { display: none; }
+
+  .cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 0 1.25rem;
+  }
+
+  .bottom { padding: 1.25rem; }
 }
 </style>
