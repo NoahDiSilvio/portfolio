@@ -27,7 +27,7 @@ document.title = 'Noah Di Silvio | 404'
       </a>
     </section>
 
-    <span class="star">✳</span>
+    <span class="star">✦</span>
   </div>
 </template>
 

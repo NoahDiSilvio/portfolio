@@ -1,8 +1,33 @@
+<script setup lang="ts">
+const starCount = 40
+
+const stars = Array.from({ length: starCount }, () => ({
+  top: Math.random() * 100 + '%',
+  left: Math.random() * 100 + '%',
+  size: 0.4 + Math.random() * 1.2,
+  delay: Math.random() * 3,
+}))
+</script>
+
 <template>
   <section id="contact" class="section">
     <h2 class="section-label reveal from-left">Contact</h2>
 
     <div class="block reveal">
+      <div class="sky" aria-hidden="true">
+        <span
+          v-for="(s, i) in stars"
+          :key="i"
+          class="twinkle"
+          :style="{
+            top: s.top,
+            left: s.left,
+            fontSize: s.size + 'rem',
+            animationDelay: s.delay + 's',
+            opacity: s.size < 0.7 ? 0.5 : 1,
+          }"
+        >✦</span>
+      </div>
       <span class="star">✦</span>
 
       <p class="small-caps intro">Stage of project in gedachten?</p>
@@ -110,5 +135,32 @@
 
 @media (max-width: 37.5rem) {
   .links { flex-direction: column; gap: 0.5rem; }
+}
+.sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.twinkle {
+  position: absolute;
+  line-height: 1;
+  color: var(--bg);
+  opacity: 0.15;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.block > *:not(.sky):not(.star) {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 0.5; transform: scale(1.1) rotate(20deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twinkle { animation: none; }
 }
 </style>
