@@ -36,8 +36,7 @@ const loop = [...skills, ...skills]
 
       <div class="slider reverse reveal">
         <div class="list">
-          <div v-for="(skill, i) in loop" :key="'name-' + i" class="item text">
-            {{ skill.name }} <span class="red">✳</span>
+          <div v-for="(skill, i) in loop" :key="'name-' + i" class="item text">{{ skill.name }} <span class="sep"></span>
           </div>
         </div>
       </div>
@@ -110,11 +109,22 @@ const loop = [...skills, ...skills]
 }
 
 .text {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
   font-family: var(--display);
   font-size: 3rem;
   line-height: 1;
   color: var(--muted);
   transition: color 0.2s;
+}
+
+.sep {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
 }
 
 .text:hover {

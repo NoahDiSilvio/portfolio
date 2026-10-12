@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const path = window.location.pathname
-document.title = '404 — Noah Di Silvio'
+document.title = 'Noah Di Silvio | 404'
 </script>
 
 <template>

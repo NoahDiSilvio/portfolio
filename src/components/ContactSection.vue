@@ -3,7 +3,7 @@
     <h2 class="section-label reveal from-left">Contact</h2>
 
     <div class="block reveal">
-      <span class="star">✳</span>
+      <span class="star">✦</span>
 
       <p class="small-caps intro">Stage of project in gedachten?</p>
 
@@ -13,7 +13,7 @@
 
       <div class="bottom">
         <div class="links small-caps">
-          <a href="https://github.com/" target="_blank">GitHub</a>
+          <a href="https://github.com/NoahDiSilvio" target="_blank">GitHub</a>
           <a href="https://www.linkedin.com/in/noah-di-silvio-6743633aa/" target="_blank">LinkedIn</a>
           <span>Gent, België</span>
         </div>

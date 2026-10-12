@@ -110,7 +110,7 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
       </div>
       <div>
         <p class="small-caps muted">Socials</p>
-        <a href="https://github.com/" target="_blank" class="roll"><span data-text="GitHub">GitHub</span></a>
+        <a href="https://github.com/NoahDiSilvio" target="_blank" class="roll"><span data-text="GitHub">GitHub</span></a>
         <a href="https://www.linkedin.com/in/noah-di-silvio-6743633aa/" target="_blank" class="roll"><span data-text="LinkedIn">LinkedIn</span></a>
       </div>
       <div>
@@ -121,10 +121,9 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
 
     <div class="marquee">
       <div class="track">
-        <span v-for="n in 4" :key="n">Waar backend en frontend samenkomen <span class="red">✳</span>&nbsp;</span>
+        <span v-for="n in 4" :key="n">Waar backend en frontend samenkomen <span class="red">●</span>&nbsp;</span>
       </div>
     </div>
-
     <div class="bottom small-caps muted">
       <span>© 2026 Noah Di Silvio</span>
       <a href="#home">Terug naar boven ↑</a>
