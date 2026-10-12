@@ -8,11 +8,13 @@ import ServicesSection from '@/components/ServicesSection.vue'
 import AboutSection from '@/components/AboutSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import NotFound from '@/components/NotFound.vue'
+import ProjectsSection from '@/components/ProjectSection.vue'
 
 const isNotFound = !['/', '/index.html'].includes(window.location.pathname)
 
 const navLinks = [
   { href: '#timeline', label: 'Traject' },
+  { href: '#projects', label: 'Projecten'},
   { href: '#skills', label: 'Skills' },
   { href: '#services', label: 'Wat ik doe' },
   { href: '#about', label: 'Over mij' },
@@ -94,6 +96,7 @@ Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
   <main>
     <HeroSection />
     <TimelineSection />
+    <ProjectsSection/>
     <SkillsSection />
     <ServicesSection />
     <AboutSection />

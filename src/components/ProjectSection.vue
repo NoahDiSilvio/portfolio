@@ -8,12 +8,14 @@ import { projects } from '../data/projects'
     <h2 class="section-label reveal from-left">Projecten</h2>
 
     <div class="grid">
-      <ProjectCard v-for="(p, i) in projects" :key="p.title" :project="p" :index="i" />
-
-      <a href="https://github.com/" target="_blank" class="more">
-        <span class="star">✳</span>
-        <span class="small-caps">Meer op GitHub</span>
-      </a>
+      <ProjectCard
+        v-for="(p, i) in projects"
+        :key="p.title"
+        :project="p"
+        :index="i"
+        class="reveal"
+        :style="{ '--delay': i * 0.1 + 's' }"
+      />
     </div>
   </section>
 </template>
@@ -21,7 +23,7 @@ import { projects } from '../data/projects'
 <style scoped>
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 8.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
   gap: 1.5rem;
 }
 
