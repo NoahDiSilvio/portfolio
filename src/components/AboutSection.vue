@@ -2,13 +2,16 @@
 import { ref } from 'vue'
 
 const showPhoto = ref(true)
+const base = import.meta.env.BASE_URL
 
 const facts = [
   { label: 'Studie', value: 'Elektronica-ICT, Odisee' },
   { label: 'Regio', value: 'Gent, België' },
   { label: 'Focus', value: 'Laravel & Vue' },
-  { label: 'Op zoek naar', value: 'Stage webontwikkeling' },
+  { label: 'Graag bezig met', value: 'Backend & API’s' },
 ]
+
+const hobbies = ['Voetbal', 'Muziek', 'Vrienden']
 </script>
 
 <template>
@@ -16,36 +19,47 @@ const facts = [
     <h2 class="section-label reveal from-left">Over mij</h2>
 
     <div class="about">
-      <h3 class="quote reveal">
-        Goede code<br />
-        is helder<br />
-        denken <span class="red">zichtbaar.</span>
-      </h3>
+      <div class="photo-wrap reveal from-left" style="--delay: 0.1s">
+        <span class="bar"></span>
+        <img
+          v-if="showPhoto"
+          :src="`${base}about.jpg`"
+          alt="Noah Di Silvio"
+          @error="showPhoto = false"
+        />
+        <span v-else class="initials">ND</span>
+      </div>
 
-      <div class="text reveal" style="--delay: 0.15s">
-        <p>
+      <div class="content">
+        <h3 class="quote reveal">
+          Goede code is helder<br />
+          denken <span class="red">zichtbaar.</span>
+        </h3>
+
+        <p class="intro reveal" style="--delay: 0.1s">
           Ik ben Noah, student Elektronica-ICT aan Odisee. Ik bouw full-stack
           webapplicaties met een Laravel-backend en een Vue-frontend, en ik hou
           van projecten waar techniek een echt probleem oplost.
         </p>
 
-        <dl class="facts">
-          <div v-for="f in facts" :key="f.label">
-            <dt class="small-caps">{{ f.label }}</dt>
-            <dd>{{ f.value }}</dd>
+        <div class="details">
+          <div class="reveal" style="--delay: 0.2s">
+            <p class="label small-caps">In het kort</p>
+            <dl class="facts">
+              <div v-for="f in facts" :key="f.label">
+                <dt class="small-caps">{{ f.label }}</dt>
+                <dd>{{ f.value }}</dd>
+              </div>
+            </dl>
           </div>
-        </dl>
-      </div>
 
-      <div class="photo-wrap reveal from-right" style="--delay: 0.3s">
-        <span class="bar"></span>
-        <img
-          v-if="showPhoto"
-          src="/about.jpg"
-          alt="Noah Di Silvio"
-          @error="showPhoto = false"
-        />
-        <span v-else class="initials">ND</span>
+          <div class="reveal" style="--delay: 0.3s">
+            <p class="label small-caps">Buiten het scherm</p>
+            <ul class="hobbies">
+              <li v-for="hobby in hobbies" :key="hobby">{{ hobby }}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -54,40 +68,15 @@ const facts = [
 <style scoped>
 .about {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 3rem;
-  align-items: center;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
 }
-
-.quote {
-  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
-  line-height: 0.95;
-}
-
-.text p {
-  color: #cfcfcf;
-  font-size: 0.95rem;
-  margin-top: 0;
-}
-
-.facts {
-  margin: 1.5rem 0 0;
-}
-
-.facts div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.facts dt { color: var(--muted); }
-.facts dd { margin: 0; font-size: 0.85rem; text-align: right; }
 
 .photo-wrap {
   position: relative;
   aspect-ratio: 4 / 5;
+  margin-left: 0.75rem;
   background: var(--bg-soft);
   display: grid;
   place-items: center;
@@ -106,11 +95,7 @@ const facts = [
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.1);
-  transition: filter 0.5s;
 }
-
-.photo-wrap:hover img { filter: grayscale(0); }
 
 .initials {
   font-family: var(--display);
@@ -118,9 +103,67 @@ const facts = [
   color: var(--border);
 }
 
-@media (max-width: 56.25rem) {
-  .about { grid-template-columns: minmax(0, 1fr); }
-  .photo-wrap { max-width: 20rem; margin-left: 0.75rem; }
+.quote {
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  line-height: 0.92;
+}
+
+.intro {
+  max-width: 38rem;
+  margin: 1.75rem 0 0;
+  color: #cfcfcf;
+  font-size: 1rem;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.label {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.facts {
+  margin: 0;
+}
+
+.facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.facts div:first-child { padding-top: 0; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; font-size: 0.85rem; text-align: right; }
+
+.hobbies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--display);
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.hobbies li:not(:last-child)::after {
+  content: '✦';
+  margin: 0 0.6rem;
+  color: var(--red);
+  font-size: 0.6em;
+  vertical-align: middle;
 }
 
 @media (hover: hover) {
@@ -129,8 +172,18 @@ const facts = [
     transition: filter 0.5s ease;
   }
 
-  .photo-wrap:hover img {
-    filter: none;
+  .photo-wrap:hover img { filter: none; }
+}
+
+@media (max-width: 56.25rem) {
+  .about { grid-template-columns: minmax(0, 1fr); }
+  .photo-wrap { max-width: 20rem; }
+}
+
+@media (max-width: 37.5rem) {
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
   }
 }
 </style>

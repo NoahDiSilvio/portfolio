@@ -16,6 +16,7 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "package.json": "link:",
     "vue": "^3.5.42"
   },
   "devDependencies": {

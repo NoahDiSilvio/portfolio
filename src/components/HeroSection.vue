@@ -1,8 +1,42 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const showPhoto = ref(true)
 const focus = ['Backend', 'Frontend', 'Databases', 'Mobile']
+
+const lines = ['Full-stack', 'web', 'developer']
+const total = lines.join('').length
+const count = ref(0)
+let timer: number | undefined
+
+const typed = computed(() => {
+  let left = count.value
+  return lines.map((line) => {
+    const n = Math.min(left, line.length)
+    left -= n
+    return { shown: line.slice(0, n), rest: line.slice(n) }
+  })
+})
+
+const activeLine = computed(() => {
+  const i = typed.value.findIndex((l) => l.rest.length > 0)
+  return i === -1 ? lines.length - 1 : i
+})
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    count.value = total
+    return
+  }
+  setTimeout(() => {
+    timer = window.setInterval(() => {
+      count.value++
+      if (count.value >= total) clearInterval(timer)
+    }, 70)
+  }, 400)
+})
+
+onUnmounted(() => clearInterval(timer))
 </script>
 
 <template>
@@ -16,10 +50,14 @@ const focus = ['Backend', 'Frontend', 'Databases', 'Mobile']
     </div>
 
     <div class="content">
-      <p class="small-caps eyebrow"><span class="dot"></span> Portfolio</p>
-      <h1>Full-stack<br />web<br />developer</h1>
+      <p class="small-caps eyebrow"><span class="dot"></span>Portfolio</p>
+      <h1 :aria-label="lines.join(' ')">
+        <span v-for="(line, i) in typed" :key="i" class="line" aria-hidden="true">
+          {{ line.shown }}<span v-if="i === activeLine" class="caret"></span><span class="rest">{{ line.rest }}</span>
+        </span>
+      </h1>
       <p class="tagline">
-        Student Elektronica-ICT aan Odisee.
+        Noah Di Silvio - Student Elektronica-ICT aan Odisee.
       </p>
     </div>
 
@@ -117,6 +155,22 @@ h1 {
   z-index: 2;
 }
 
+.line {
+  display: block;
+}
+
+.rest {
+  visibility: hidden;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.75em;
+  margin-left: 0.04em;
+  background: currentColor;
+  animation: blink 0.8s steps(1) infinite;
+}
 
 @media (max-width: 48rem) {
   .visual { right: -20%; opacity: 0.5; width: 80vw; }
@@ -128,7 +182,7 @@ h1 {
   animation: fadeUp 0.9s cubic-bezier(0.2, 0.65, 0.3, 1) forwards;
 }
 .content > *:nth-child(2) { animation-delay: 0.15s; }
-.content > *:nth-child(3) { animation-delay: 0.3s; }
+.content > *:nth-child(3) { animation-delay: 2s; }
 .content > *:nth-child(4) { animation-delay: 0.45s; }
 
 .circle {
@@ -146,6 +200,11 @@ h1 {
   animation: fadeIn 1s 0.9s ease forwards;
 }
 
+.content > h1 {
+  opacity: 1;
+  animation: none;
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(2.5rem); }
   to { opacity: 1; transform: none; }
@@ -157,6 +216,10 @@ h1 {
 
 @keyframes fadeIn {
   to { opacity: 1; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 @media (hover: hover) {

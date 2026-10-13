@@ -327,8 +327,8 @@ window.removeEventListener('keydown', onKeydown)
   }
 
   .bottom { padding: 1.25rem; }
-}
 
-.links .roll span::after { display: none; }
-.links .roll:hover span { transform: none; color: var(--red); }
+  .links .roll span::after { display: none; }
+  .links .roll:hover span { transform: none; color: var(--red); }
+}
 </style>
