@@ -26,7 +26,8 @@ const stars = Array.from({ length: starCount }, () => ({
             animationDelay: s.delay + 's',
             opacity: s.size < 0.7 ? 0.5 : 1,
           }"
-        >✦</span>
+          >✦</span
+        >
       </div>
       <span class="star">✦</span>
 
@@ -37,13 +38,9 @@ const stars = Array.from({ length: starCount }, () => ({
       <a href="mailto:noah.di.silvio7@gmail.com" class="email">noah.di.silvio7@gmail.com ↗</a>
 
       <div class="bottom">
-        <div class="links small-caps">
-          <a href="https://github.com/NoahDiSilvio" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/noah-di-silvio-6743633aa/" target="_blank">LinkedIn</a>
-          <span>Gent, België</span>
-        </div>
+        <p class="small-caps cv-text">Liever eerst mijn cv bekijken?</p>
 
-        <a href="/cv.pdf" download="CV-Noah-Di-Silvio.pdf" class="cv">
+        <a :href="`/cv.pdf`" download="CV-Noah-Di-Silvio.pdf" class="cv">
           Download CV <span>↓</span>
         </a>
       </div>
@@ -72,8 +69,10 @@ const stars = Array.from({ length: starCount }, () => ({
 }
 
 .intro {
+  margin: 0 0 1.25rem;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
   font-weight: 600;
-  margin: 0 0 1rem;
+  letter-spacing: 0.08em;
 }
 
 .title {
@@ -93,7 +92,9 @@ const stars = Array.from({ length: starCount }, () => ({
   overflow-wrap: anywhere;
 }
 
-.email:hover { padding-left: 0.5rem; }
+.email:hover {
+  padding-left: 0.5rem;
+}
 
 .bottom {
   display: flex;
@@ -106,13 +107,12 @@ const stars = Array.from({ length: starCount }, () => ({
   border-top: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-.links {
-  display: flex;
-  gap: 2rem;
+.cv-text {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
   font-weight: 600;
+  letter-spacing: 0.08em;
 }
-
-.links a:hover { text-decoration: underline; }
 
 .cv {
   display: inline-flex;
@@ -129,13 +129,16 @@ const stars = Array.from({ length: starCount }, () => ({
   transition: transform 0.2s;
 }
 
-.cv:hover { transform: translateY(-0.125rem); }
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-@media (max-width: 37.5rem) {
-  .links { flex-direction: column; gap: 0.5rem; }
+.cv:hover {
+  transform: translateY(-0.125rem);
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .sky {
   position: absolute;
   inset: 0;
@@ -156,12 +159,21 @@ const stars = Array.from({ length: starCount }, () => ({
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.15; transform: scale(0.8) rotate(0deg); }
-  50% { opacity: 0.5; transform: scale(1.1) rotate(20deg); }
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1) rotate(20deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .twinkle { animation: none; }
+  .twinkle {
+    animation: none;
+  }
 }
 
 @media (max-width: 62.5rem) {

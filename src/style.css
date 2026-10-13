@@ -59,7 +59,7 @@ h1, h2, h3 {
   position: relative;
   grid-template-columns: 3.75rem minmax(0, 1fr);
   gap: 3rem;
-  padding: clamp(5rem, 10vw, 9rem) 0;
+  padding: clamp(4rem, 8vw, 7rem) 0;
   border-top: 1px solid var(--border);
 }
 
@@ -233,9 +233,29 @@ html {
   }
 }
 
-html:not(.loaded) .hero h1,
-html:not(.loaded) .hero h1 * {
+html:not(.loaded) .hero .content > *,
+html:not(.loaded) .hero .photo,
+html:not(.loaded) .hero .side {
   animation-play-state: paused;
 }
 
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s;
+}
 
+@media (hover: hover) {
+  .btn-outline:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+}

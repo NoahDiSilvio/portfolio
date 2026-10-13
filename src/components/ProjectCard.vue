@@ -12,6 +12,7 @@ defineProps<{ project: Project; index: number }>()
     </header>
 
     <div class="thumb">
+      <span v-if="project.status" class="status small-caps">{{ project.status }}</span>
       <img v-if="project.image" :src="project.image" :alt="`Screenshot van ${project.title}`" />
       <span v-else class="placeholder">{{ project.title }}</span>
     </div>
@@ -69,6 +70,7 @@ defineProps<{ project: Project; index: number }>()
 }
 
 .thumb {
+  position: relative;
   aspect-ratio: 16 / 10;
   display: grid;
   place-items: center;
@@ -153,6 +155,18 @@ defineProps<{ project: Project; index: number }>()
   padding-bottom: 0.15rem;
   color: var(--muted);
   transition: color 0.2s, border-color 0.2s;
+}
+
+.status {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.65rem;
 }
 
 @media (hover: hover) {

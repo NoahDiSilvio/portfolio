@@ -36,6 +36,7 @@ const services = [
           v-for="(s, i) in services"
           :key="s.title"
           class="service reveal"
+          :open="i === 0"
           :style="{ '--delay': i * 0.1 + 's' }"
         >
           <summary>

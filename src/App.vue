@@ -115,7 +115,6 @@ onUnmounted(() => {
         <a v-for="link in navLinks" :key="link.href" :href="link.href" class="roll" :class="{ active: activeId === link.href.slice(1) }" @click="closeMenu">
           <span :data-text="link.label">{{ link.label }}</span>
         </a>
-        <span class="dot"></span>
       </div>
     </nav>
 
@@ -196,8 +195,6 @@ onUnmounted(() => {
 
 .links .active span { color: var(--red); }
 
-.links a:hover { color: var(--red); }
-
 .menu-toggle { display: none; }
 
 .footer {
@@ -247,8 +244,8 @@ onUnmounted(() => {
 
 .bottom {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
+  gap: 2rem;
   padding: 1.25rem 2rem;
   border-top: 1px solid var(--border);
 }
@@ -319,8 +316,6 @@ onUnmounted(() => {
     font-size: 2.5rem;
     letter-spacing: 0.02em;
   }
-
-  .links .dot { display: none; }
 
   .cols {
     grid-template-columns: repeat(2, minmax(0, 1fr));

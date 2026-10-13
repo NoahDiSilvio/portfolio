@@ -1,6 +1,7 @@
 export interface Project {
   title: string
   type: string
+  status?: string
   description: string
   tech: string[]
   image?: string
@@ -12,7 +13,8 @@ export const projects: Project[] = [
   {
     title: 'Restje',
     type: 'Mobile app',
-    description: 'App die een boodschappenlijst maakt op basis van je weekmenu en voorraad. (onder constructie)',
+    status: 'In ontwikkeling',
+    description: 'App die een boodschappenlijst maakt op basis van je weekmenu en voorraad.',
     tech: ['Flutter'],
     image: '/projects/restje.png',
   },
@@ -28,8 +30,9 @@ export const projects: Project[] = [
   },
   {
     title: 'Kompas Bakkerij',
-    type: 'Teamproject · Agile Team Project',
-    description: 'Een webplatform waarop klanten online brood en gebak kunnen bestellen bij een bakkerij en ophalen op een gekozen dag. (onder constructie)',
+    type: 'Teamproject · Agile',
+    status: 'In ontwikkeling',
+    description: 'Een webplatform waarop klanten online brood en gebak kunnen bestellen bij een bakkerij en ophalen op een gekozen dag.',
     tech: ['Vue', 'Laravel'],
     image: '/projects/kompas.png',
   },
