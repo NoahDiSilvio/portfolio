@@ -10,11 +10,11 @@ import ContactSection from '@/components/ContactSection.vue'
 import NotFound from '@/components/NotFound.vue'
 import ProjectsSection from '@/components/ProjectSection.vue'
 
-const isNotFound = !['/', '/index.html'].includes(window.location.pathname)
+const isNotFound = !['/'].includes(window.location.pathname)
 
 const navLinks = [
   { href: '#about', label: 'Over mij' },
-  { href: '#projects', label: 'Projecten'},
+  { href: '#projects', label: 'Projecten' },
   { href: '#services', label: 'Wat ik doe' },
   { href: '#skills', label: 'Skills' },
   { href: '#timeline', label: 'Traject' },
@@ -24,10 +24,37 @@ const navLinks = [
 const activeId = ref('home')
 const progress = ref(0)
 
+const menuOpen = ref(false)
+
+function closeMenu() {
+  menuOpen.value = false
+}
+
+watch(menuOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') closeMenu()
+}
+
 function onScroll() {
   const max = document.documentElement.scrollHeight - window.innerHeight
   progress.value = max > 0 ? window.scrollY / max : 0
 }
+
+const minTime = new Promise((resolve) => setTimeout(resolve, 1200))
+
+const pageLoaded = new Promise((resolve) => {
+  if (document.readyState === 'complete') resolve(null)
+  else window.addEventListener('load', () => resolve(null), { once: true })
+})
+
+Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
+  document.documentElement.classList.add('loaded')
+  window.dispatchEvent(new Event('app-loaded')) // seintje voor de hero
+  setTimeout(() => document.getElementById('loader')?.remove(), 900)
+})
 
 onMounted(() => {
   const observer = new IntersectionObserver(
@@ -59,42 +86,17 @@ onMounted(() => {
   )
 
   document.querySelectorAll('section[id]').forEach((el) => sectionObserver.observe(el))
+
   window.addEventListener('scroll', onScroll, { passive: true })
   onScroll()
+
+  window.addEventListener('keydown', onKeydown)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onKeydown)
 })
-
-const minTime = new Promise((resolve) => setTimeout(resolve, 1200))
-
-const pageLoaded = new Promise((resolve) => {
-  if (document.readyState === 'complete') resolve(null)
-  else window.addEventListener('load', () => resolve(null), { once: true })
-})
-
-Promise.all([minTime, pageLoaded, document.fonts.ready]).then(() => {
-  document.documentElement.classList.add('loaded')
-  setTimeout(() => document.getElementById('loader')?.remove(), 900)
-})
-
-const menuOpen = ref(false)
-
-function closeMenu() {
-  menuOpen.value = false
-}
-
-watch(menuOpen, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
-})
-
-function onKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape') closeMenu()
-}
-
-window.addEventListener('keydown', onKeydown)
-window.removeEventListener('keydown', onKeydown)
 </script>
 
 <template>

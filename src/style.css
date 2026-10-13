@@ -7,6 +7,7 @@
   --border: #262626;
   --display: 'Bebas Neue', sans-serif;
   --body: 'Inter', system-ui, sans-serif;
+  --fun: 'Spicy Rice', cursive;
 }
 
 html,
@@ -132,6 +133,12 @@ h1, h2, h3 {
   text-transform: uppercase;
 }
 
+.fun {
+  font-family: var(--fun);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 @media (max-width: 49rem) {
   main { padding: 0 1.25rem; }
   .section {
@@ -224,6 +231,11 @@ html {
   body {
     padding-top: 4.75rem;
   }
+}
+
+html:not(.loaded) .hero h1,
+html:not(.loaded) .hero h1 * {
+  animation-play-state: paused;
 }
 
 

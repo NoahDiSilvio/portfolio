@@ -12,7 +12,7 @@ document.title = 'Noah Di Silvio | 404'
 
       <h1 class="code">4<span class="zero"></span>4</h1>
 
-      <h2>Deze pagina bestaat <span class="red">niet.</span></h2>
+      <h2>Deze pagina bestaat <span class="red fun">niet.</span></h2>
 
       <p class="terminal">
         <span class="muted">$</span> GET {{ path }}

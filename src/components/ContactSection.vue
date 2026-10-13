@@ -32,7 +32,7 @@ const stars = Array.from({ length: starCount }, () => ({
 
       <p class="small-caps intro">Stage of project in gedachten?</p>
 
-      <h3 class="title">Laten we<br />praten.</h3>
+      <h3 class="title">Laten we<br /><span class="fun">praten.</span></h3>
 
       <a href="mailto:noah.di.silvio7@gmail.com" class="email">noah.di.silvio7@gmail.com ↗</a>
 

@@ -23,20 +23,34 @@ const activeLine = computed(() => {
   return i === -1 ? lines.length - 1 : i
 })
 
+function startTyping() {
+  timer = window.setInterval(() => {
+    count.value++
+    if (count.value >= total) clearInterval(timer)
+  }, 70)
+}
+
+function startAfterLoader() {
+  setTimeout(startTyping, 600)
+}
+
 onMounted(() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     count.value = total
     return
   }
-  setTimeout(() => {
-    timer = window.setInterval(() => {
-      count.value++
-      if (count.value >= total) clearInterval(timer)
-    }, 70)
-  }, 400)
+
+  if (document.documentElement.classList.contains('loaded')) {
+    startAfterLoader()
+  } else {
+    window.addEventListener('app-loaded', startAfterLoader, { once: true })
+  }
 })
 
-onUnmounted(() => clearInterval(timer))
+onUnmounted(() => {
+  clearInterval(timer)
+  window.removeEventListener('app-loaded', startAfterLoader)
+})
 </script>
 
 <template>
@@ -105,8 +119,10 @@ onUnmounted(() => clearInterval(timer))
 }
 
 h1 {
-  font-size: clamp(4rem, 12vw, 9.5rem);
-  line-height: 0.88;
+  font-family: var(--fun);
+  font-size: clamp(3rem, 8.5vw, 7rem);
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 .tagline {

@@ -33,7 +33,7 @@ const hobbies = ['Voetbal', 'Muziek', 'Vrienden']
       <div class="content">
         <h3 class="quote reveal">
           Goede code is helder<br />
-          denken <span class="red">zichtbaar.</span>
+          denken <span class="red fun">zichtbaar.</span>
         </h3>
 
         <p class="intro reveal" style="--delay: 0.1s">
@@ -152,10 +152,10 @@ const hobbies = ['Voetbal', 'Muziek', 'Vrienden']
   margin: 0;
   padding: 0;
   list-style: none;
-  font-family: var(--display);
+  font-family: var(--fun);
   font-size: clamp(1.75rem, 2.5vw, 2.25rem);
   line-height: 1.1;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .hobbies li:not(:last-child)::after {
