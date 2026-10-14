@@ -63,7 +63,7 @@ onUnmounted(() => {
         </span>
       </h1>
       <p class="tagline">
-        Noah Di Silvio · Student Elektronica-ICT aan Odisee.
+        Noah Di Silvio · Student
       </p>
       <div class="actions">
         <a href="#projects" class="btn-arrow">
