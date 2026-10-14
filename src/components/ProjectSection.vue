@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProjectCard from './ProjectCard.vue'
-import { projects } from '../data/projects'
+import { projects } from '@/data/projects'
 
 function span(i: number, total: number): number {
   const rest = total % 3

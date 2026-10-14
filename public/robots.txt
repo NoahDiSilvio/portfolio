@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noahdisilvio.com/sitemap.xml
